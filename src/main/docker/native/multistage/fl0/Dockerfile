@@ -1,9 +1,13 @@
 ## Stage 1 : build with maven builder image with native capabilities
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
-COPY mvnw /code/mvnw
+
+USER root
+COPY --chmod=744 mvnw /code/mvnw
 COPY .mvn /code/.mvn
 COPY pom.xml /code/
-RUN chmod 777 /code
+RUN chown quarkus:quarkus -R /code
+
+USER quarkus
 WORKDIR /code
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
 COPY src /code/src
