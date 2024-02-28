@@ -51,7 +51,7 @@ If you want to learn more about building native executables, please consult http
 
 You can create a nativedocker image using:
 ```shell script
-docker build -f src/main/docker/Dockerfile.multistage -t alstinson/voting-app .
+docker build -f src/main/docker/Dockerfile -t alstinson/voting-app .
 ```
 
 After the image has been created you can run it using:
