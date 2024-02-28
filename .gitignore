@@ -1,10 +1,10 @@
 # Deployment
-*
+/*
 !.gitignore
 
-!target/quarkus-app/lib/*
-!target/quarkus-app/*.jar
-!target/quarkus-app/app/*
-!target/quarkus-app/quarkus/*
+!target
+target/*
+!target/quarkus-app
+!target/quarkus-app/*
 
 !src/main/docker/*
