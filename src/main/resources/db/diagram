@@ -1,0 +1,31 @@
+Table surveys {
+  id uuid [primary key, default: 'gen_random_uuid()']
+  code varchar [unique, not null]
+  name varchar
+  description text
+  active bit [not null]
+}
+
+Table survey_options {
+  id uuid [primary key, default: 'gen_random_uuid()']
+  survey uuid [not null]
+  number integer [not null]
+  value varchar [not null]
+}
+
+Table survey_responses {
+  id uuid [primary key, default: 'gen_random_uuid()']
+  survey uuid [not null]
+  option uuid [not  null]
+  code uuid [not null]
+}
+
+Table codes {
+  id uuid [primary key, default: 'gen_random_uuid()']
+  value varchar [not null]
+}
+
+Ref: surveys.id < survey_options.survey
+Ref: surveys.id < survey_responses.survey
+Ref: survey_options.id < survey_responses.option
+Ref: codes.id < survey_responses.code
