@@ -72,3 +72,14 @@ docker run --rm -p 8080:8080 alstinson/voting-app
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+# Environment variables needed
+
+In order to make the component work the following environment variables should be provided
+```
+quarkus.datasource.jdbc.url
+quarkus_datasource_username
+quarkus_datasource_password
+quarkus.http.cors.origins
+quarkus.admin.tokens
+```
