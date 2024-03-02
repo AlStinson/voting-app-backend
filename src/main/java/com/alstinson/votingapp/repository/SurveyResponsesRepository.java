@@ -1,5 +1,6 @@
 package com.alstinson.votingapp.repository;
 
+import com.alstinson.votingapp.model.SurveyOption;
 import com.alstinson.votingapp.model.SurveyResponse;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,5 +21,9 @@ public class SurveyResponsesRepository implements PanacheRepositoryBase<SurveyRe
 
     public Optional<SurveyResponse> getResponseBySurveyIdAndCodeId(UUID survey, UUID code) {
         return find(SurveyResponse.Fields.survey + " = ?1 AND " + SurveyResponse.Fields.code + " = ?2", survey, code).stream().findFirst();
+    }
+
+    public long deleteBySurveyId(UUID uuid) {
+        return delete(SurveyResponse.Fields.survey, uuid);
     }
 }
