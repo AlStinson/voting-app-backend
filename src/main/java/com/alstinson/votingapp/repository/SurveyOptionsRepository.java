@@ -10,7 +10,7 @@ import java.util.UUID;
 @ApplicationScoped
 public class SurveyOptionsRepository implements PanacheRepositoryBase<SurveyOption, UUID> {
     public List<SurveyOption> getOptionsBySurveyId(UUID uuid) {
-        return find(SurveyOption.Fields.survey, uuid).stream().toList();
+        return find(SurveyOption.Fields.survey, uuid).list();
     }
 
     public long deleteBySurveyId(UUID uuid) {

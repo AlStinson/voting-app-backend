@@ -12,11 +12,11 @@ import java.util.UUID;
 @ApplicationScoped
 public class SurveyResponsesRepository implements PanacheRepositoryBase<SurveyResponse, UUID> {
     public List<SurveyResponse> getResponsesBySurveyId(UUID survey) {
-        return find(SurveyResponse.Fields.survey, survey).stream().toList();
+        return find(SurveyResponse.Fields.survey, survey).list();
     }
 
     public List<SurveyResponse> getResponsesByCodeID(UUID code) {
-        return find(SurveyResponse.Fields.code, code).stream().toList();
+        return find(SurveyResponse.Fields.code, code).list();
     }
 
     public Optional<SurveyResponse> getResponseBySurveyIdAndCodeId(UUID survey, UUID code) {
