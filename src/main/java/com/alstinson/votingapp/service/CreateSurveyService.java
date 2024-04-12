@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @ApplicationScoped
@@ -29,7 +30,7 @@ public class CreateSurveyService {
         surveysRepository.persist(survey);
         List<SurveyOption> options = createSurvey.toSurveyOptionModels(survey.getId());
         surveyOptionsRepository.persist(options);
-        return AdminSurveyInfo.fromModels(survey, options, new ArrayList<>());
+        return AdminSurveyInfo.fromModels(survey, options, new HashMap<>());
     }
 
     private String generateCode() {

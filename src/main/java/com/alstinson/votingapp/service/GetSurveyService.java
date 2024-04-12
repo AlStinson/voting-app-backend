@@ -19,7 +19,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import static com.alstinson.votingapp.utils.Count.count;
 
 @ApplicationScoped
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -44,8 +47,8 @@ public class GetSurveyService {
     public AdminSurveyInfo adminGet(String code) {
         Survey survey = surveysRepository.getByCode(code).orElseThrow(NotFoundException::new);
         List<SurveyOption> options = surveyOptionsRepository.getOptionsBySurveyId(survey.getId());
-        List<UUID> responseOptionsIds = surveyResponsesRepository.getResponsesBySurveyId(survey.getId()).stream().map(SurveyResponse::getOption).toList();
-        return AdminSurveyInfo.fromModels(survey, options, responseOptionsIds);
+        Map<UUID, Integer> votesByOption = count(surveyResponsesRepository.getResponsesBySurveyId(survey.getId())).by(SurveyResponse::getOption);
+        return AdminSurveyInfo.fromModels(survey, options, votesByOption);
     }
 
     public VoterSurveyInfo get(String surveyCode, String codeValue) throws NotFoundException {
